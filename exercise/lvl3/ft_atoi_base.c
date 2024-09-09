@@ -1,68 +1,73 @@
 #include <stdio.h>
 
-char to_lower(char c)
+char to_lower(char str)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (c + ('a' - 'A'));
-	return (c);
+    if (str >= 'A' && str <= 'Z')
+        str += 32;
+    return str;
 }
 
-int get_digit(char c, int digits_in_base)
+int get_digit(char c, int str_base)
 {
-	int max_digit;
+    int max;
 
-	if (digits_in_base <= 10)
-		max_digit = digits_in_base - 1 + '0';
-	else
-		max_digit = digits_in_base - 10 - 1 + 'a';
-
-	if (c >= '0' && c <= '9' && c <= max_digit)
-		return (c - '0');
-	else if (c >= 'a' && c <= 'f' && c <= max_digit)
-		return (10 + c - 'a');
-	else
-		return (-1);
+    if (str_base <= 10)
+        max = str_base - 1 + '0';
+    else
+        max = str_base - 10 - 1 + 'a';
+    
+    if (c >= '0' && c <= '9' && c <= max)
+        return (c - '0');  // -48
+    else if (c >= 'a' && c <= 'f' && c <= max)
+        return (10 + c - 'a');  // -87
+    else
+        return -1;
 }
 
 int ft_atoi_base(const char *str, int str_base)
 {
-	int result = 0;
-	int sign = 1;
-	int digit;
+    int res = 0;
+    int sign = 1;
+    int digit;
 
-	if (str == NULL || str_base < 2 || str_base > 16)
-		return 0;
+    if (!str || str_base < 2 || str_base > 16)
+        return 0;
 
-	if (*str == '-')
-	{
-		sign = -1;
-		++str;
-	}
+    while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\r' || *str == '\v' || *str == '\f')
+        str++;
+    
+    if (*str == '-')
+    {
+        sign = -1;
+        str++;
+    }
+    else if (*str == '+')
+    {
+        str++;
+    }
+    while (*str)
+    {
+        digit = get_digit(to_lower(*str), str_base);
+        if (digit == -1)
+            break;
+        res = res * str_base + digit;
+        str++;
+    }
 
-	while (*str)
-	{
-		digit = get_digit(to_lower(*str), str_base);
-		if (digit == -1)
-			break;
-		result = result * str_base + digit;
-		++str;
-	}
-	return (result * sign);
+    return (res * sign);
 }
 
-/*#include <stdio.h>
-
-int main()
+/*int main()
 {
     const char *str1 = "2A";
     const char *str2 = "1011";
     const char *str3 = "-7F";
     const char *str4 = "  1E";
     
-    int base1 = 10;
-    int base2 = 2;
-    int base3 = 10;
-    int base4 = 10;
+    int base1 = 16;  // Hexadecimal for "2A"
+    int base2 = 2;   // Binary for "1011"
+    int base3 = 16;  // Hexadecimal for "-7F"
+    int base4 = 16;  // Hexadecimal for "  1E"
     
     int result1 = ft_atoi_base(str1, base1);
     int result2 = ft_atoi_base(str2, base2);
@@ -75,52 +80,4 @@ int main()
     printf("String: %s, Base: %d, Result: %d\n", str4, base4, result4);
 
     return 0;
-}*/
-
-
-
-//ver2
-
-/*int ft_isblank(char c)
-{
-	if (c <= 32)
-		return (1);
-	return (0);
-}
-
-int		ft_isvalid(char c, int base)
-{
-	char digits[17] = "0123456789abcdef";
-	char digits2[17] = "0123456789ABCDEF";
-
-	while (base--)
-		if (digits[base] == c || digits2[base] == c)
-			return (1);
-	return (0);
-}
-
-int		ft_value_of(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (c - '0');
-	else if (c >= 'a' && c <= 'f')
-		return (c - 'a' + 10);
-	else if (c >= 'A' && c <= 'F')
-		return (c - 'A' + 10);
-	return (0);
-}
-
-int		ft_atoi_base(const char *str, int str_base)
-{
-	int result;
-	int sign;
-
-	result = 0;
-	while (ft_isblank(*str))
-		str++;
-	sign = (*str == '-') ? -1 : 1;
-	(*str == '-' || *str == '+') ? ++str : 0;
-	while (ft_isvalid(*str, str_base))
-		result = result * str_base + ft_value_of(*str++);
-	return (result * sign);
 }*/
