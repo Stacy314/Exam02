@@ -1,25 +1,26 @@
 #include <stdlib.h>
 
-
-char *ft_itoa(int nbr) 
+char	*ft_itoa(int nbr)
 {
 	if(nbr == -2147483648)
 		return("-2147483648\0");
+    if (nbr == 0)
+		return("0\0");
 	int n = nbr;
 	int len = 0;
 	if (nbr <= 0)
-		len++;
+		len++; //for minus
 	while (n) 
 	{
 		n /= 10;
 		len++;
 	}
 	char *result = (char *)malloc(sizeof(char) * (len + 1));
-	if (result == NULL) 
+	if (!result) 
 		return NULL;
 	result[len] = '\0';
-	if (nbr == 0)
-		return(result = "0");
+	//if (nbr == 0)
+		//return(result = "0");
 	if (nbr < 0) 
 	{
 		result[0] = '-';
@@ -33,12 +34,3 @@ char *ft_itoa(int nbr)
 	}
 	return result;
 }
-
-
-/*#include <stdio.h>
-#include <limits.h>
-int main()
-{
-	printf("%s\n", ft_itoa(-1314246));
-	printf("%d\n", INT_MAX);
-}*/
