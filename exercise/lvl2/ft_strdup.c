@@ -17,6 +17,6 @@ char    *ft_strdup(char *src)
         dup[len] = src[len];
         len++;
     }
-    dup[len] = '\0';
+    dup[len] = '\0'; //dont foget
     return dup;
 }

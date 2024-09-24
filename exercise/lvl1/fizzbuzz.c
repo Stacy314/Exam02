@@ -1,12 +1,13 @@
 #include <unistd.h>
 
-void ft_write_number(int i)
+void ft_putnbr(int i)
 {
-    char str[10] = "0123456789";
+    char c;
 
-    if (i > 9)
-        ft_write_number(i / 10);
-    write(1, &str[i % 10], 1);
+	if (i > 9)
+		ft_putnbr(i / 10);
+	c = i % 10 + '0';
+	write(1, &c, 1);
 }
 
 int main()
@@ -22,7 +23,7 @@ int main()
         else if (i % 5 == 0)
             write(1, "buzz", 4);
         else
-            ft_write_number(i);
+            ft_putnbr(i);
         write(1, "\n", 1);     
         i++;
     }

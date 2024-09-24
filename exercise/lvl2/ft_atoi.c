@@ -13,7 +13,7 @@ int	ft_atoi(const char *str)
     }
 	while (*str >= '0' && *str <= '9')
 	{
-		integer = integer * 10 + *str - 48;
+		integer = integer * 10 + *str - '0';
 		str++;
 	}
 	return (sign * integer);

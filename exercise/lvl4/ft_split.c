@@ -50,3 +50,21 @@ char	**ft_split(char *str)
 	substr[k] = '\0';
 	return (substr);
 }
+
+/*int main()
+{
+    char str[] = "Hello, this is a test string with multiple words";
+    
+    // Call ft_split and get the array of substrings
+    char **result = ft_split(str);
+    
+    // Print each substring
+    for (int i = 0; result[i] != NULL; i++)
+    {
+        printf("Substring %d: %s\n", i, result[i]);
+        free(result[i]); // Don't forget to free the memory for each substring
+    }
+
+    free(result); // Free the array of pointers itself
+    return 0;
+}*/

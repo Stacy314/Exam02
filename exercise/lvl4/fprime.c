@@ -1,18 +1,21 @@
-int	main(int argc, char **argv)
+#include <stdio.h>
+#include <stdlib.h>
+
+int main (int ac, char **av)
 {
-	int	i = 1;
+	int	i = 2;
 	int	number = 0;
 
-	if (argc == 2)
+	if (ac == 2)
 	{
-		number = atoi(argv[1]);
+		number = atoi(av[1]);
 		if (number == 1)
         {
 			printf("1\n");
             return 0;
         }
 
-        while(number >= ++i)
+        while(number >= i)
         {
             if (number % i == 0)
             {   
@@ -20,9 +23,10 @@ int	main(int argc, char **argv)
                 if (number == i)
                     break;
                 printf("*");
-                number = number / i;
+                number /=  i;
                 i = 1;
             }
+            i++;
         }
 	}
 	printf("\n");

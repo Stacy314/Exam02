@@ -4,7 +4,7 @@ int	ft_atoi(char *str)
 {
 	int n = 0;
 
-	while (*str != '\0')
+	while (*str)
 	{
 		n = n * 10 + *str - '0';
 		++str;

@@ -8,7 +8,7 @@ t_list	*sort_list(t_list* lst, int (*cmp)(int, int))
     start = lst;
     while(lst && lst->next)
     {
-        if(!(*cmp)(lst->data, lst->next->data))
+        if(!(*cmp)(lst->data, lst->next->data)) //0 if lst->data > lst->next->data
         {
             swap = lst->data;
             lst->data = lst->next->data;

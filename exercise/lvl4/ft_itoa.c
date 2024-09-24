@@ -24,11 +24,11 @@ char	*ft_itoa(int nbr)
 	if (nbr < 0) 
 	{
 		result[0] = '-';
-		nbr = -nbr;
+		nbr = -nbr; // *-1
 	}
 	while (nbr) 
 	{
-		len--;
+		len--; //'\0'
 		result[len] = nbr % 10 + '0';
 		nbr /= 10;
 	}
